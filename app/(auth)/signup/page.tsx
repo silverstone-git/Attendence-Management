@@ -47,7 +47,7 @@ const page: FC<pageProps> = () => {
 
           axios({
             method: "post",
-            url: "http://localhost:5001/register",
+            url: "https://ashish-ka-server.vercel.app/register",
             // url: {`${process.env.}`},
             data: {
               name: name,

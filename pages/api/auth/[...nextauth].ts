@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const { username, password } = credentials as any;
-        const res = await fetch(`http://localhost:5001/login`, {
+        const res = await fetch(`https://ashish-ka-server.vercel.app/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      // console.log({ session, token, user });
+      console.log({ session, token, user });
       session.user = token as any;
       return session;
     },
