@@ -1,13 +1,14 @@
 "use client";
 
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { FC } from "react";
-import axios from "axios";
+import * as schemas from "../../util/schema";
+import { signMeUp } from "@/app/util/server";
 
 interface pageProps {}
 
-interface LoginFormValues {
+interface SignupFormValues {
   name: string;
   rollNumber: string;
   email: string;
@@ -15,25 +16,12 @@ interface LoginFormValues {
 }
 
 const page: FC<pageProps> = () => {
-  const initialValues: LoginFormValues = {
+  const initialValues: SignupFormValues = {
     name: "",
     rollNumber: "",
     email: "",
     password: "",
   };
-
-  // const configuration = {
-  //   method: "post",
-  //   url: "http://localhost:5001/regster",
-  //   data: {
-  //     name: String,
-  //     rollNumber: String,
-  //     email: String,
-  //     password: String,
-  //   },
-  // };
-
-  // console.log(process.env.);
 
   const borderStyles = "border-2 rounded-lg border-gray-500 px-2 py-2";
 
@@ -42,38 +30,13 @@ const page: FC<pageProps> = () => {
       <h1 className="text-xl text-center p-5">Signup</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={({ name, rollNumber, email, password }, actions) => {
-          // console.log({ name, actions });
-
-          axios({
-            method: "post",
-            url: "https://ashish-ka-server.vercel.app/register",
-            // url: {`${process.env.}`},
-            data: {
-              name: name,
-              rollNumber: rollNumber,
-              email: email,
-              password: password,
-            },
-          })
-            .then((result) => {
-              console.log(result);
-              alert(
-                JSON.stringify("Account Created, now you can login", null, 2)
-              );
-            })
-            .catch((error) => {
-              console.log(error.response.data);
-              alert(
-                JSON.stringify(
-                  "An error occured, try again later or contact admin",
-                  null,
-                  2
-                )
-              );
-            });
+        onSubmit={async ({ name, rollNumber, email, password }, actions) => {
+          const signMeUpRes = await signMeUp(name, rollNumber, email, password);
+          console.log(signMeUpRes);
+          alert(signMeUpRes?.data ?? "Nahi horha signup");
           actions.setSubmitting(false);
         }}
+        validationSchema={schemas.createUserSchema}
       >
         <Form className="gap-10">
           <div className=" ">
@@ -85,8 +48,9 @@ const page: FC<pageProps> = () => {
               className="outline-none w-full"
               required
             />
+            <ErrorMessage name="name" className="text-red font-bold" />
           </div>
-          <div className=" ">
+          <div>
             <label>Roll No.</label> <br />
             <Field
               id="rollNumber"
@@ -95,6 +59,7 @@ const page: FC<pageProps> = () => {
               className="outline-none w-full"
               required
             />
+            <ErrorMessage name="rollNumber" className="text-red font-bold" />
           </div>
           {/* email input lene wala section */}
           <div className=" ">
@@ -106,6 +71,7 @@ const page: FC<pageProps> = () => {
               className="outline-none w-full"
               required
             />
+            <ErrorMessage name="email" className="text-red font-bold" />
           </div>
 
           <div>
@@ -117,6 +83,7 @@ const page: FC<pageProps> = () => {
               className="outline-none w-full"
               type="password"
             />
+            <ErrorMessage name="password" className="text-red font-bold" />
           </div>
           <button type="submit" className="py-2 px-4 border-2">
             Signup
