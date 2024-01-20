@@ -1,44 +1,81 @@
+"use client";
+import Button from "./_components/Button";
+import Modal from "./_components/Modal";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+
 export default function Home() {
+  const [openDialog, setOpenDialog] = useState(false);
+  const toggleDialog = () => setOpenDialog(!openDialog);
+  const closeDialog = () => setOpenDialog(false);
   return (
-    <div className="w-[1440px] h-[827px] relative bg-stone-950">
-      <div className="w-[1440px] h-[1614px] left-0 top-0 absolute bg-stone-950"></div>
-      <div className="w-[135px] h-6 left-[248px] top-[48px] absolute text-rose-200 text-2xl font-bold font-['Inter']">
-        AttendEase
-      </div>
-      <div className="w-[173px] h-12 left-[440px] top-[613px] absolute bg-green-500 rounded shadow justify-center items-center inline-flex">
-        <div className="w-[173px] h-12 text-center text-stone-950 text-base font-normal font-['Inter']">
-          Get Started
+    <main className="flex justify-between">
+      <div>
+        <div>
+          <h1 className="text-5xl font-extrabold leading-[57.6px] pt-[120px] pb-[58px] text-heading">
+            Seamlessly Track <br />
+            your Attendance, <br />
+            Effortlessly Stay <br />
+            on Schedule.
+          </h1>
         </div>
-      </div>
-      <div className="w-[173px] h-12 left-[834px] top-[48px] absolute bg-green-500 rounded shadow justify-center items-center inline-flex">
-        <div className="w-[173px] h-12 text-center text-stone-950 text-base font-normal font-['Inter']">
-          Get Started
+
+        <p className="pb-16 text-xl ">
+          AttendEase enables you to effortlessly track <br /> attendance while
+          staying on schedule seamlessly.
+        </p>
+
+        <div className="flex gap-5">
+          <Button primary onClick={() => setOpenDialog(true)}>
+            Read More
+          </Button>
+          <Button>Get Started</Button>
         </div>
+
+        <Modal
+          open={openDialog}
+          onRequestClose={closeDialog}
+          closeOnOutsideClick
+          className="p-0 sm:mx-[245px] border-2 border-transparent rounded-lg"
+
+          // className="bg-buttonBackgroundPrimary text-white"
+        >
+          <article className="text-center bg-buttonBgBrown text-white px-5 py-[28px]">
+            <h1 className="text-[28px] font-semibold pb-[30px] ">
+              Why AttendEase?
+            </h1>
+            <p className="pb-5  font-light">
+              AttendEase is a comprehensive platform designed to make attendance
+              tracking a breeze, ensuring that you never miss a beat while
+              effortlessly staying on schedule. With its seamless functionality,
+              AttendEase allows you to easily monitor and record attendance for
+              your classes. By streamlining the process, AttendEase eliminates
+              the need for manual record-keeping, paper-based systems, or
+              tedious spreadsheets.
+            </p>
+            <p className="pb-5  font-light">
+              It empowers you to efficiently track attendance day by day,
+              ensuring accurate and up-to-date records. With AttendEase, you can
+              focus on what truly matters - whether its managing a team,
+              optimizing productivity, or maintaining punctuality - while the
+              platform takes care of the attendance tracking seamlessly, leaving
+              you with peace of mind and the ability to effortlessly stay on top
+              of your schedule.
+            </p>
+            {/* <button onClick={() => setOpenDialog(false)}>close</button> */}
+          </article>
+        </Modal>
       </div>
-      <div className="w-[173px] h-12 left-[1022px] top-[47px] absolute bg-green-500 rounded shadow justify-center items-center inline-flex">
-        <div className="w-[173px] h-12 text-center text-stone-950 text-base font-normal font-['Inter']">
-          Log In
-        </div>
+      <div className="flex justify-center">
+        <Image 
+            src="/home.svg"
+            width={500}
+            height={500}
+            alt="AttendEase Home Page Image"
+          />
       </div>
-      <div className="w-[173px] h-12 left-[247px] top-[613px] absolute bg-red-900 rounded shadow justify-center items-center inline-flex">
-        <div className="w-[173px] h-12 text-center text-rose-200 text-base font-normal font-['Inter']">
-          Read More
-        </div>
-      </div>
-      <div className="w-[456px] h-56 left-[247px] top-[205px] absolute text-rose-200 text-5xl font-black font-['Inter'] leading-[57.60px]">
-        Seamlessly Track <br />
-        your Attendance, Effortlessly Stay
-        <br />
-        on Schedule.
-      </div>
-      <div className="w-[463px] h-[53px] left-[247px] top-[487px] absolute text-rose-200 text-xl font-normal font-['Inter'] leading-[30px]">
-        AttendEase enables you to effortlessly track attendance while staying on
-        schedule seamlessly.
-      </div>
-      <img
-        className="w-[473px] h-[335px] left-[724px] top-[205px] absolute"
-        src="https://via.placeholder.com/473x335"
-      />
-    </div>
+    </main>
   );
 }

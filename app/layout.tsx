@@ -7,6 +7,8 @@ import { Providers } from "@/components/theme-provider";
 import DarkModeToggle from "./_components/dark_mode_toggle";
 import Link from "next/link";
 import SignOutButton from "./_components/log_out_button";
+import Button from "./_components/Button";
+import Header from "./Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +23,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+
+  if(session?.user != null) {
+
+  }
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`bg-background mx-40 my-8 ${inter.className}`}>
         <SessionProvider session={session}>
           <Providers>
-            <div className="flex flex-col">
-              Header: auth: {` user map -> ${JSON.stringify(session?.user)}`}
-              {session?.user == null ? (
-                <Link href={"/signin"}>SignIn</Link>
-              ) : <SignOutButton />}
-              <DarkModeToggle />
-            </div>
-            <div className=" min-h-[90vh] ">{children}</div>
+              <Header session = {session}/>
+              {/* Header: auth: {` user map -> ${JSON.stringify(session?.user)}`} */}
+            <div className=" min-h-[80vh] ">{children}</div>
           </Providers>
         </SessionProvider>
       </body>
