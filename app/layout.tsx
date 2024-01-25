@@ -24,18 +24,18 @@ export default async function RootLayout({
 }) {
   const session = await auth();
 
-  if(session?.user != null) {
-
-  }
-
   return (
     <html lang="en">
-      <body className={`bg-background mx-40 my-8 ${inter.className}`}>
+      <body
+        className={`bg-background w-full flex flex-col justify-center items-center
+       ${inter.className}`}
+      >
         <SessionProvider session={session}>
           <Providers>
-              <Header session = {session}/>
-              {/* Header: auth: {` user map -> ${JSON.stringify(session?.user)}`} */}
-            <div className=" min-h-[80vh] ">{children}</div>
+            <div className="w-9/12 pt-10">
+              <Header session={session} />
+              <div className=" min-h-[80vh] ">{children}</div>
+            </div>
           </Providers>
         </SessionProvider>
       </body>

@@ -11,7 +11,7 @@ const Button = ({ children, primary, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`border-2 border-transparent text-base ${
+      className={`hidden sm:block border-2 border-transparent text-base ${
         primary ? "bg-buttonBgBrown " : "bg-buttonBgGreen text-black"
       }
      w-[173px] h-[48px] rounded-[4px]`}

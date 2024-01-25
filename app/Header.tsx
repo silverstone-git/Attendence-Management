@@ -16,7 +16,7 @@ interface Props {
 const Header = ({ children, primary, onClick, session }: Props) => {
   const name = session?.user?.name;
   return (
-    <header className="flex flex-row justify-between p-2">
+    <header className="flex flex-row justify-between">
       <div className="flex">
         <h1 className="text-4xl font-semibold p-1">AttendEase</h1>
       </div>
@@ -26,14 +26,15 @@ const Header = ({ children, primary, onClick, session }: Props) => {
             <Button onClick={() => signIn("google")}> Sign in</Button>
           </div>
         ) : (
-          <div className=" flex gap-5">
+          <div className=" flex gap-5 ">
             <Button primary>{name}</Button>
-            <Button>
+
+            <div className="hidden md:block">
               <SignOutButton />
-            </Button>
+            </div>
           </div>
         )}
-        <DarkModeToggle />
+        {/* <DarkModeToggle /> */}
       </div>
     </header>
   );
