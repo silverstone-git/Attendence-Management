@@ -13,6 +13,7 @@ const config: Config = {
         background: "#1A0505",
         buttonBgGreen: "#4BDD4B",
         buttonBgBrown: "#6D1D1D",
+        blockBg: "#f8d8d8",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

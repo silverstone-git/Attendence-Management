@@ -2,6 +2,7 @@ import Block from "../_components/Block";
 import Button from "../_components/Button";
 import { middleware } from "../middleware";
 import Total from "../_components/Total";
+import TimeTable from "../_components/TimeTable";
 
 const uploadAttendancePage = () => {
   return (
@@ -11,13 +12,13 @@ const uploadAttendancePage = () => {
           Upload Your <br /> Attendance{" "}
         </h1>
         <div className="text-2xl font-bold">
-            <h1>From Date - 01/01/2024 </h1>
-            <h1>To Date - 01/05/2024 </h1>
+          <h1>From Date - 01/01/2024 </h1>
+          <h1>To Date - 01/05/2024 </h1>
         </div>
       </div>
       {/* TABLE HERE */}
       <div>
-
+        <TimeTable />
       </div>
       <Total />
     </div>
