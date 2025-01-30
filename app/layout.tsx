@@ -1,3 +1,4 @@
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 import AppBar from "@/components/AppBar";
@@ -10,11 +11,13 @@ export const metadata = {
   description: "atendance ka rkh lo hissab",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body className="">
@@ -22,6 +25,7 @@ export default function RootLayout({
           <AppBar />
           {children}
         </Provider>
+
       </body>
     </html>
   );
