@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { signIn } from "next-auth/react";
-import Button from "./_components/Button";
-import SignOutButton from "./_components/log_out_button";
-import Modal from "./_components/Modal";
+import Button from "@/app/_components/Button";
+import Modal from "@/app/_components/Modal";
 
-interface Props {
-  children?: React.ReactNode;
-}
+//interface Props {
+//  children?: React.ReactNode;
+//}
 
-const DialogButton = ({ children }: Props) => {
+const DialogButton = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  const toggleDialog = () => setOpenDialog(!openDialog);
+  //const toggleDialog = () => setOpenDialog(!openDialog);
   const closeDialog = () => setOpenDialog(false);
   return (
     <div>

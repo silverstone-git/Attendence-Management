@@ -1,11 +1,12 @@
-"use client";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import DarkModeToggle from "../app/_components/dark_mode_toggle";
+import { DarkModeProvider } from "./theme-provider";
+import { auth } from "@/auth";
+import SignOutButton from "../app/_components/sign_out_button";
+import SignInButton from "@/app/_components/sign_in_button";
 
-const AppBar = () => {
-  const { data: session } = useSession();
-  // console.log("session", session);
+const AppBar = async () => {
+  const session = await auth();
 
   return (
     <div className="flex justify-around h-16 bg-yellow-400 text-lg">
@@ -15,7 +16,7 @@ const AppBar = () => {
             Home
           </Link>
         )}
-        <Link href="/user/dashboard" className="text-blue-800 font-bold px-4">
+        <Link href="/dashboard" className="text-blue-800 font-bold px-4">
           Dashboard
         </Link>
         <Link className="text-blue-800 font-bold px-4" href="/user/profile">
@@ -25,22 +26,16 @@ const AppBar = () => {
       <div>
         {session?.user ? (
           <div className="flex">
+            <DarkModeProvider>
+              <DarkModeToggle />
+            </DarkModeProvider>
             <p className="px-2 py-4">{session.user.name}</p>
-            <button
-              className="border-2 border-transparent bg-blue-600 px-2 py-1 rounded-lg text-white m-4"
-              onClick={() => signOut()}
-            >
-              Signout
-            </button>
+
+            <SignOutButton />
           </div>
         ) : (
           <>
-            <button
-              className="border-2 border-transparent bg-blue-600 px-2 py-1 rounded-lg text-white m-4"
-              onClick={() => signIn()}
-            >
-              SignIn
-            </button>
+            <SignInButton />
             <button className="border-2 border-transparent bg-blue-600 px-2 py-1 rounded-lg text-white m-4">
               <Link href="/signup">Signup</Link>
             </button>

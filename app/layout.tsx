@@ -2,13 +2,12 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import AppBar from "@/components/AppBar";
-import Provider from "@/components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Attendease",
-  description: "atendance ka rkh lo hissab",
+  description: "attendance ka rakh lo hisaab",
 };
 
 export default async function RootLayout({
@@ -16,16 +15,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
 
   return (
-    <html lang="en">
-      <body className="">
-        <Provider>
+    <html lang="en" className={inter.className}>
+      <body className="dark:bg-slate-900 dark:text-white">
           <AppBar />
           {children}
-        </Provider>
-
       </body>
     </html>
   );

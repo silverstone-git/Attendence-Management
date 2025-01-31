@@ -24,22 +24,6 @@ const page: FC<pageProps> = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={({ email, password }, actions) => {
-          // axios({
-          //   method: "post",
-          //   url: "http://localhost:5001/login",
-          //   data: {
-          //     email: email,
-          //     password: password,
-          //   },
-          // })
-          //   .then((result) => {
-          //     console.log(result);
-          //     alert(JSON.stringify("you are logged in", null, 2));
-          //   })
-          //   .catch((error) => {
-          //     console.log(error.response.data);
-          //     alert(JSON.stringify(error.response.data.message, null, 2));
-          //   });
 
           const result = signIn("credentials", {
             username: email,

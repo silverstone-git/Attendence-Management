@@ -1,19 +1,16 @@
 "use client"
-import { useTheme } from "next-themes";
 import {useEffect, useState} from "react";
+import { useDarkMode } from "../../components/theme-provider";
 
 const DarkModeToggle = () => {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true)
   }, [])
   if(!mounted) return null;
-  if (resolvedTheme == "dark") {
-    return <div onClick={() => setTheme("light")}>Sun</div>;
-  } else {
-    return <div onClick={() => setTheme("dark")}>Moon</div>;
-  }
+
+  return <div className="cursor-pointer" onClick={toggleDarkMode}>{isDarkMode ? 'Sun' : 'Moon'}</div>;
 };
 
 export default DarkModeToggle;

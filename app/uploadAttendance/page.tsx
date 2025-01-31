@@ -1,6 +1,3 @@
-import Block from "../_components/Block";
-import Button from "../_components/Button";
-import { middleware } from "../middleware";
 import Total from "../_components/Total";
 import TimeTable from "../_components/TimeTable";
 
@@ -23,11 +20,6 @@ const uploadAttendancePage = () => {
       <Total />
     </div>
   );
-};
-
-export const config = {
-  matcher: ["/uploadAttendance"], // Protect /dashboard route
-  middleware: [middleware],
 };
 
 export default uploadAttendancePage;

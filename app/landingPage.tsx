@@ -1,13 +1,12 @@
 import Button from "./_components/Button";
 import Image from "next/image";
-import Link from "next/link";
-import DialogButton from "./dialogButton";
+import DialogButton from "@/app/_components/dialogButton";
 
-interface Props {
-    children?: React.ReactNode;
-}
+//interface Props {
+//    children?: React.ReactNode;
+//}
 
-const LandingPage = ({ children }: Props) => {
+const LandingPage = () => {
   
   return (
     <main className="flex justify-between">

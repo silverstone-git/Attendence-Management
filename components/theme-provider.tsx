@@ -1,10 +1,32 @@
-"use client";
+"use client"
+import { createContext, useContext, useState, ReactNode } from 'react';
 
-import { ThemeProvider } from "next-themes";
-import {ThemeProviderProps} from "next-themes/dist/types";
-import React from "react";
+type DarkModeContextType = {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+};
 
-export function Providers({ children } : {children: React.ReactNode}) {
-  return <ThemeProvider attribute="class" defaultTheme="system" enableSystem>{children}</ThemeProvider>;
-}
+const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
 
+export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark', !isDarkMode);
+  };
+
+  return (
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      {children}
+    </DarkModeContext.Provider>
+  );
+};
+
+export const useDarkMode = () => {
+  const context = useContext(DarkModeContext);
+  if (context === undefined) {
+    throw new Error('useDarkMode must be used within a DarkModeProvider');
+  }
+  return context;
+};
