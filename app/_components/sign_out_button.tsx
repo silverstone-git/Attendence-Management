@@ -1,16 +1,16 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Button from "./Button";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 
- const SignOutButton = () => {
-  return <Button onClick={() => signOutFun()}>Sign Out</Button>;
-};
-
-const signOutFun = async() => {
+const signOutFun = async(router: NextRouter) => {
   signOut();
-  const router = useRouter();
   router.push('/');
 }
+
+const SignOutButton = () => {
+  const router = useRouter();
+  return <Button onClick={() => signOutFun(router)}>Sign Out</Button>;
+};
 
 export default SignOutButton;

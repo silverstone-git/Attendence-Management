@@ -13,6 +13,7 @@ const emailOptions = {
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // @ts-ignore
   adapter: MongoDBAdapter(client),
   providers: [
 
